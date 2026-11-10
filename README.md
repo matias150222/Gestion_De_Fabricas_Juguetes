@@ -38,7 +38,7 @@ El sistema gestiona 3 entidades interconectadas manteniendo integridad referenci
 </p>
 
 <p align="center">
-  <img src="images/valorizacion.png" width="650px" alt="Valorización Inventario">
+  <img src="images/valorizacion_inventario_almacen_por_producto.png" width="650px" alt="Valorización Inventario">
 </p>
 
 ---
