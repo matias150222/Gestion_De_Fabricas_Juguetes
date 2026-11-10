@@ -34,7 +34,7 @@ El sistema gestiona 3 entidades interconectadas manteniendo integridad referenci
 
 ### 3. Reportes Gráficos (Matplotlib)
 <p align="center">
-  <img src="images/distribucion_stock.png" width="650px" alt="Distribución Stock">
+  <img src="images/distribucion%StockXPaisDest.png" width="650px" alt="Distribución Stock">
 </p>
 
 <p align="center">
