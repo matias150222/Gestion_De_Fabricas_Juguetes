@@ -1,106 +1,158 @@
-🧸 Sistema de Gestión Logística y Financiera de Juguetes (POO & BD Relacional)
+# 🧸 Sistema de Gestión Logística y Financiera de Juguetes
 
-Un sistema integral en Python para la administración logística, control de inventarios y análisis financiero de una empresa multinacional de juguetes. El proyecto implementa arquitectura orientada a objetos (POO), modelado relacional con claves primarias y foráneas sobre almacenamiento en Excel (Gestion.xlsx), validación estricta de integridad referencial y reportes analíticos interactivos con Matplotlib.
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-data-150458?logo=pandas&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-charts-11557c)
+![Excel](https://img.shields.io/badge/Storage-Excel-217346?logo=microsoft-excel&logoColor=white)
 
-🚀 Tecnologías y Herramientas
+Sistema integral en Python para la administración logística, el control de inventarios y el análisis financiero de una empresa multinacional de juguetes.
 
-Python 3.x: Núcleo de la aplicación estructurado en arquitectura orientada a objetos (POO) y control avanzado de excepciones (try-except).
+El proyecto implementa **programación orientada a objetos (POO)**, un **modelo relacional** con claves primarias y foráneas sobre almacenamiento en Excel (`Gestion.xlsx`), **validación estricta de integridad referencial** y **reportes analíticos interactivos** con Matplotlib.
 
-Pandas & NumPy: Procesamiento vectorial de datos, manejo de estructuras relacionales y cálculos de márgenes financieros evitando división por cero.
+---
 
-Matplotlib: Generación de reportes gráficos interactivos (histogramas, torta, barras agrupadas).
+## 📑 Tabla de contenidos
 
-Openpyxl: Persistencia atómica de datos sobre múltiples hojas de Excel.
+- [Tecnologías y herramientas](#-tecnologías-y-herramientas)
+- [Modelo relacional](#️-modelo-relacional-gestionxlsx)
+- [Módulos del sistema](#-módulos-del-sistema)
+- [Demostración y capturas](#-demostración-y-capturas)
+- [Instalación y ejecución](#️-instalación-y-ejecución)
+- [Estructura del proyecto](#-estructura-del-proyecto)
+- [Licencia y autor](#-licencia-y-autor)
 
-🗂️ Modelo Relacional (Gestion.xlsx)
+---
 
-El sistema gestiona 3 entidades relacionales interconectadas mediante claves primarias (PK) y claves foráneas (FK), garantizando la integridad de datos antes de cada inserción:
+## 🚀 Tecnologías y herramientas
 
-  ┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
-  │     tb_pais     │       │   tb_fabrica    │       │   tb_juguete    │
-  ├─────────────────┤       ├─────────────────┤       ├─────────────────┤
-  │ PK  id_pais     │◄──────┤ FK  id_pais_orig│       │ PK  id_juguete  │
-  │     nombre      │       │ PK  id_fabrica  │◄──────┤ FK  id_fabrica  │
-  │     impuesto    │       │     nombre      │       │     nombre      │
-  │     tipo        │       │     capacidad   │       │     stock       │
-  └─────────────────┘       └─────────────────┘       │     precio_venta│
-           ▲                                          │     costo_prod  │
-           └──────────────────────────────────────────┤ FK  id_pais_dest│
-                                                      └─────────────────┘
+| Herramienta | Uso en el proyecto |
+|---|---|
+| **Python 3.x** | Núcleo de la aplicación con arquitectura orientada a objetos y control de excepciones (`try-except`). |
+| **Pandas & NumPy** | Procesamiento vectorial, manejo de estructuras relacionales y cálculo de márgenes financieros evitando división por cero. |
+| **Matplotlib** | Reportes gráficos interactivos: histogramas, gráficos de torta y barras agrupadas. |
+| **Openpyxl** | Persistencia de datos sobre múltiples hojas de Excel. |
 
+---
 
-tb_pais: Almacena los países registrados como Origen (plantas) o Destino (mercados de exportación) junto con sus tasas de impuesto.
+## 🗂️ Modelo relacional (`Gestion.xlsx`)
 
-tb_fabrica: Almacena las plantas de producción, su capacidad máxima anual y el país de origen asociado.
+El sistema gestiona **3 entidades** interconectadas mediante claves primarias (PK) y foráneas (FK), validando la integridad de los datos antes de cada inserción.
 
-tb_juguete: Contiene el inventario de productos, costos, precios, stock y sus vinculaciones con la fábrica de origen y el país de destino.
+```text
+┌─────────────────┐       ┌─────────────────┐       ┌──────────────────┐
+│     tb_pais     │       │   tb_fabrica    │       │    tb_juguete    │
+├─────────────────┤       ├─────────────────┤       ├──────────────────┤
+│ PK  id_pais     │◄──────┤ FK  id_pais_orig│       │ PK  id_juguete   │
+│     nombre      │       │ PK  id_fabrica  │◄──────┤ FK  id_fabrica   │
+│     impuesto    │       │     nombre      │       │     nombre       │
+│     tipo        │       │     capacidad   │       │     stock        │
+└─────────────────┘       └─────────────────┘       │     precio_venta │
+         ▲                                          │     costo_prod   │
+         └──────────────────────────────────────────┤ FK  id_pais_dest │
+                                                    └──────────────────┘
+```
 
-💻 Módulos del Sistema
+| Tabla | Descripción |
+|---|---|
+| `tb_pais` | Países registrados como **Origen** (plantas) o **Destino** (mercados de exportación), con su tasa de impuesto. |
+| `tb_fabrica` | Plantas de producción, capacidad máxima anual y país de origen asociado. |
+| `tb_juguete` | Inventario de productos: costos, precios, stock y vínculos con la fábrica de origen y el país de destino. |
 
-El programa se organiza en un menú interactivo con submenús por entidad:
+---
 
-Módulo de Países (tb_pais):
+## 💻 Módulos del sistema
 
-Listado ordenado con formato de porcentaje impositivo.
+El programa se organiza en un **menú interactivo** con submenús por entidad.
 
-Registro de nuevos países con autoincremento de ID.
+### 🌍 Módulo de Países (`tb_pais`)
+- Listado ordenado con formato de porcentaje impositivo.
+- Registro de nuevos países con **autoincremento de ID**.
+- 📊 **Gráfico:** comparativo de tasas impositivas por país (Origen vs. Destino).
 
-📊 Gráfico: Comparativo de tasas impositivas por país (Origen vs. Destino).
+### 🧩 Módulo de Juguetes (`tb_juguete`)
+- Inventario completo con cruce de información (**JOIN**) de fábrica y país.
+- Registro de nuevos juguetes con comprobación de claves foráneas obligatorias.
+- Cálculos financieros: ingresos totales por producto e impuestos de destino.
+- 📊 **Gráficos:** valorización total del inventario en almacén ($) y distribución porcentual de stock por país de exportación.
 
-Módulo de Juguetes (tb_juguete):
+### 🏭 Módulo de Fábricas (`tb_fabrica`)
+- Listado de plantas y cálculo de capacidad utilizada.
+- Cálculo de ingresos agrupados por fábrica e impuestos de origen.
+- Análisis de **margen de ganancia (%)** por producto: `(Ganancia / Ingresos) × 100`.
+- Asignación interactiva de juguetes en la memoria interna del objeto `Fabrica`.
+- 📊 **Gráficos:** impuestos de origen por fábrica y comparativo de capacidad anual vs. stock real.
 
-Inventario completo con cruce de información (JOIN) de fábrica y país.
+---
 
-Registro de nuevos juguetes con comprobación de claves foráneas obligatorias.
+## 📸 Demostración y capturas
 
-Cálculos financieros: Ingresos totales por producto e impuestos de destino.
+> 💡 Guarda tus imágenes en una carpeta `capturas/` y ajusta los nombres de archivo si es necesario.
 
-📊 Gráficos: Valorización total del inventario en almacén ($) y distribución porcentual de stock por país de exportación.
+### 1. Interfaz de consola y tablas formateadas
+La consola formatea automáticamente los datos numéricos a moneda (`$`) y porcentajes (`%`), ajustando el ancho de las columnas.
 
-Módulo de Fábricas (tb_fabrica):
+![Consola](capturas/consola.png)
 
-Listado de plantas y cálculo de capacidad utilizada.
-
-Cálculo de ingresos agrupados por fábrica e impuestos de origen.
-
-Análisis financiero de Margen de Ganancia (%) por producto ((Ganancia / Ingresos) × 100).
-
-Asignación interactiva de juguetes en la memoria interna del objeto Fabrica.
-
-📊 Gráficos: Impuestos de origen por fábrica y comparativo de capacidad anual vs. stock real.
-
-📸 Demostración y Capturas del Sistema
-
-1. Interfaz de Consola y Tablas Formateadas
-
-La consola formatea automáticamente los datos numéricos a moneda ($) y porcentajes (%) ajustando el ancho de columnas.
-
-2. Menú Interactivo
-
+### 2. Menú interactivo
 Estructura modular con gestión de excepciones ante errores de escritura por consola.
 
-3. Visualizaciones Analíticas e Interactivas (Matplotlib)
+![Menú](capturas/menu.png)
 
-Reporte de Impuestos por País:
+### 3. Visualizaciones analíticas (Matplotlib)
 
-Valorización del Inventario en Almacén ($):
+**Reporte de impuestos por país**
 
-Distribución de Stock por País de Destino:
+![Impuestos por país](capturas/impuestos_pais.png)
 
-⚙️ Instalación y Ejecución
+**Valorización del inventario en almacén ($)**
 
-Clonar o descargar el repositorio:
+![Valorización del inventario](capturas/valorizacion_inventario.png)
 
-git clone https://github.com/TU_USUARIO/Gestion_De_Fabricas_Juguetes.git
-cd Gestion_De_Fabricas_Juguetes
+**Distribución de stock por país de destino**
 
+![Distribución de stock](capturas/distribucion_stock.png)
 
-Instalar las dependencias de Python:
+---
 
-pip install pandas numpy openpyxl matplotlib
+## ⚙️ Instalación y ejecución
 
+1. **Clonar o descargar el repositorio:**
 
-Ejecutar la aplicación:
-Asegúrate de que el archivo Gestion.xlsx se encuentre en la misma carpeta que Gestion.py.
+   ```bash
+   git clone https://github.com/TU_USUARIO/Gestion_De_Fabricas_Juguetes.git
+   cd Gestion_De_Fabricas_Juguetes
+   ```
 
-python Gestion.py
+2. **Instalar las dependencias:**
+
+   ```bash
+   pip install pandas numpy openpyxl matplotlib
+   ```
+
+3. **Ejecutar la aplicación:**
+
+   Asegúrate de que `Gestion.xlsx` esté en la misma carpeta que `Gestion.py`.
+
+   ```bash
+   python Gestion.py
+   ```
+
+---
+
+## 📁 Estructura del proyecto
+
+```text
+Gestion_De_Fabricas_Juguetes/
+├── Gestion.py        # Aplicación principal (POO + menús)
+├── Gestion.xlsx      # Base de datos relacional (tb_pais, tb_fabrica, tb_juguete)
+├── capturas/         # Imágenes para el README
+└── README.md
+```
+
+---
+
+## 📄 Licencia y autor
+
+Proyecto distribuido bajo la licencia **MIT** (ajusta según corresponda).
+
+Desarrollado por **TU_NOMBRE** · [GitHub](https://github.com/TU_USUARIO)
